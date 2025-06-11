@@ -1,0 +1,20 @@
+{
+  "name": "cookieclickerclone",
+  "version": "1.0.0",
+  "description": "A web application which seeks to mimic the popular web game Cookie Clicker with a unique twist",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ThomasDHolt/CookieClickerClone.git"
+  },
+  "author": "Thomas Holt",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ThomasDHolt/CookieClickerClone/issues"
+  },
+  "homepage": "https://github.com/ThomasDHolt/CookieClickerClone#readme",
+  "type": "module"
+}
