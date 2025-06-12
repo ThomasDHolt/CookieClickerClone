@@ -1,0 +1,11 @@
+.flex-container {
+    display: flex;
+}
+
+.flex-column {
+    flex-direction: column;
+}
+
+.upgrade-button {
+    width: 300px;
+}
