@@ -1,4 +1,5 @@
 import * as saveData from "./data/saveData.js";
+import * as string from "./string.js";
 
 const bakeButton = document.getElementById("bakeButton");
 const cookieCounter = document.getElementById("cookieCounter");
@@ -47,6 +48,7 @@ function SaveState()
     localStorage.setItem("timeMachineCount", saveData.upgradeCountState.timeMachine);
     localStorage.setItem("quantumOvenCount", saveData.upgradeCountState.quantumOven);
     localStorage.setItem("alienTechnologyCount", saveData.upgradeCountState.alienTechnology);
+    localStorage.setItem("interdimensionalBakerCount", saveData.upgradeCountState.interdimensionalBaker);
 }
 
 function UpdateUI()
@@ -54,8 +56,8 @@ function UpdateUI()
     const truncCookieCount = Math.trunc(saveData.gameState.cookieCounter);
     const truncCps = Math.trunc(saveData.gameState.cps * 10) / 10;
 
-    cookieCounter.innerText = `${truncCookieCount} cookies`;
-    cpsText.innerHTML = `CPS: ${truncCps}`;
+    cookieCounter.innerText = `${string.FormatNumber(truncCookieCount)} cookies`;
+    cpsText.innerHTML = `CPS: ${string.FormatNumber(truncCps)}`;
 }
 
 function DrawUpgradeButtons(data)
@@ -66,7 +68,7 @@ function DrawUpgradeButtons(data)
         const newButton = document.createElement("button");
         newButton.innerText = `${data[i].name} - ${data[i].cost}`;
         newButton.classList.add("upgrade-button");
-        newButton.addEventListener("click", (event) => {PurchaseUpgrade(event, data[i])});
+        newButton.addEventListener("click", () => {PurchaseUpgrade(data[i])});
         upgradesSection.appendChild(newButton);
     }
 }
@@ -92,7 +94,7 @@ async function GetUpgradeData()
     return data;
 }
 
-function PurchaseUpgrade(event, upgradeData)
+function PurchaseUpgrade(upgradeData)
 {
     if(saveData.gameState.cookieCounter >= upgradeData.cost)
     {
@@ -120,4 +122,5 @@ resetButton.addEventListener("click", () => {
     saveData.upgradeCountState.timeMachine = 0;
     saveData.upgradeCountState.quantumOven = 0;
     saveData.upgradeCountState.alienTechnology = 0;
+    saveData.upgradeCountState.interdimensionalBaker = 0;
 });

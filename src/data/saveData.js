@@ -1,3 +1,5 @@
+import * as string from "../string.js"
+
 export const gameState = {
     cookieCounter: Number(localStorage.getItem("cookieCounter")) || 0,
     cps: Number(localStorage.getItem("cps")) || 0
@@ -26,47 +28,9 @@ export function IncrementUpgradeCount(upgradeId)
     {
         if(upgradeState[i].id == upgradeId)
         {
-            const name = ConvertUpgradeString(upgradeState[i].name);
+            const name = string.ConvertUpgradeString(upgradeState[i].name);
             upgradeCountState[name]++;
             return;
         }
     }
-}
-
-function ConvertUpgradeString(upgradeString)
-{
-    if(typeof upgradeString !== "string") return "";
-    let splitName = upgradeString.toLowerCase();
-    
-    for(let i = 0; i < splitName.length; i++)
-    {
-        if(splitName[i] == " ")
-        {
-            //Split by space
-            splitName = splitName.split(" ");
-            
-            for(let j = 1; j < splitName.length; j++)
-            {
-                splitName[j] = splitName[j].charAt(0).toUpperCase() + splitName[j].slice(1);
-            }
-
-            splitName = splitName.join("");
-            break;
-        }
-        if(splitName[i] == "-")
-        {
-            //Split by dash
-            splitName = splitName.split("-");
-            
-            for(let j = 1; j < splitName.length; j++)
-            {
-                splitName[j] = splitName[j].charAt(0).toUpperCase() + splitName[j].slice(1);
-            }
-
-            splitName = splitName.join("");
-            break;
-        }
-    }
-
-    return splitName;
 }

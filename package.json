@@ -16,5 +16,8 @@
     "url": "https://github.com/ThomasDHolt/CookieClickerClone/issues"
   },
   "homepage": "https://github.com/ThomasDHolt/CookieClickerClone#readme",
-  "type": "module"
+  "type": "module",
+  "dependencies": {
+    "vitest": "^3.2.3"
+  }
 }
