@@ -6,23 +6,24 @@ const cookieCounter = document.getElementById("cookieCounter");
 const cpsText = document.getElementById("cpsText");
 const resetButton = document.getElementById("resetButton");
 const upgradesSection = document.getElementById("upgradesSection");
+const upgradeTotals = [];
 
 const tickRateInSeconds = 0.01; // 10 milliseconds
-
-console.log(saveData.upgradeCountState);
 
 Start();
 
 async function Start()
 {
-    setInterval(SaveState, 1000);
+    setInterval(SaveState, 1000 * 60);
     setInterval(Tick, (tickRateInSeconds * 1000)); //Convert from seconds to milliseconds
 
     const upgradeData = await GetUpgradeData();
-    saveData.SetUpgradeData(upgradeData);
-    DrawUpgradeButtons(saveData.upgradeData);
+    const upgradeImageData = await GetUpgradeImageData();
 
-    console.log("UpgradeData:", saveData.upgradeData);
+    saveData.SetUpgradeData(upgradeData);
+    saveData.SetUpgradeImageData(upgradeImageData);
+
+    DrawUpgradeButtons(saveData.upgradeData);
 }
 
 function Tick()
@@ -58,47 +59,104 @@ function UpdateUI()
 
     cookieCounter.innerText = `${string.FormatNumber(truncCookieCount)} cookies`;
     cpsText.innerHTML = `CPS: ${string.FormatNumber(truncCps)}`;
+
+    for(let i = 0; i < upgradeTotals.length; i++)
+    {
+        const formatName = string.ConvertUpgradeString(saveData.upgradeData[i].name);
+        const count = saveData.GetUpgradeCount(formatName);
+        upgradeTotals[i].innerText = count;
+    }
+
+    document.title = `${string.FormatNumber(truncCookieCount)} cookies - Cookie Clicker`;
 }
 
-function DrawUpgradeButtons(data)
+function DrawUpgradeButtons(upgradeData)
 {
-    for(let i = 0; i < data.length; i++)
+    for(let i = 0; i < upgradeData.length; i++)
     {
-        console.log(`${data[i].name}:`, data[i]);
-        const newButton = document.createElement("button");
-        newButton.innerText = `${data[i].name} - ${data[i].cost}`;
-        newButton.classList.add("upgrade-button");
-        newButton.addEventListener("click", () => {PurchaseUpgrade(data[i])});
-        upgradesSection.appendChild(newButton);
+        const buttonDiv = document.createElement("div");
+        buttonDiv.classList.add("flex-container", "flex-row", "upgrade-button-border-style");
+
+        const imageDiv = document.createElement("div");
+        imageDiv.classList.add("image-div", "flex-container", "flex-centre-horizontal", "flex-centre-vertical");
+
+        const buttonAnchor = document.createElement("a");
+        buttonAnchor.addEventListener("click", () => {PurchaseUpgrade(upgradeData[i])});
+        buttonAnchor.classList.add("upgrade-button");
+        imageDiv.appendChild(buttonAnchor);
+
+        const upgradeImage = document.createElement("img");
+        upgradeImage.src = saveData.GetUpgradeImage(upgradeData[i].id);
+        upgradeImage.classList.add("upgrade-button-image-size", "pixelate", "image-border-style");
+        buttonAnchor.appendChild(upgradeImage);
+        buttonDiv.appendChild(imageDiv);
+
+        const upgradeName = document.createElement("p");
+        upgradeName.innerText = upgradeData[i].name;
+        upgradeName.classList.add("upgrade-name-margin");
+        buttonDiv.appendChild(upgradeName);
+
+        const detailsDiv = document.createElement("div");
+        detailsDiv.classList.add("flex-container", "flex-column", "flex-grow")
+
+        const upgradeCost = document.createElement("p");
+        upgradeCost.innerText = `${string.FormatNumber(upgradeData[i].cost)} cookies`;
+        upgradeCost.classList.add("upgrade-cost-font", "text-at-end");
+        detailsDiv.appendChild(upgradeCost);
+
+        const upgradeTotal = document.createElement("p");
+        upgradeTotal.innerText = "0";
+        upgradeTotal.classList.add("upgrade-total-font", "text-at-end");
+        upgradeTotals.push(upgradeTotal);
+        detailsDiv.appendChild(upgradeTotal);
+
+        buttonDiv.appendChild(detailsDiv);
+
+        upgradesSection.appendChild(buttonDiv);
     }
+}
+
+async function LoadJsonFromUrl(url)
+{
+    try
+    {
+        const response = await fetch(url);
+        const data = await response.json();
+        return data;
+    } catch (error)
+    {
+        throw new Error(`${error}`);
+    }
+}
+
+async function GetUpgradeImageData()
+{
+    const upgradeImageData = await LoadJsonFromUrl("./src/data/upgradeImages.json");
+    return upgradeImageData;
 }
 
 async function GetUpgradeData()
 {
-    const response = await fetch("https://cookie-upgrade-api.vercel.app/api/upgrades");
-    console.log("HTTP Response:", response);
-    const data = await response.json();
-    console.log("JSON Data:", data);
+    const upgradeData = await LoadJsonFromUrl("https://cookie-upgrade-api.vercel.app/api/upgrades");
 
-    for(let i = 0; i < data.length; i++)
+    for(let i = 0; i < upgradeData.length; i++)
     {
         const newUpgradeState = {
-            id: `${data[i].id}`,
-            name: `${data[i].name}`,
+            id: `${upgradeData[i].id}`,
+            name: `${upgradeData[i].name}`,
             count: 0
         }
 
         saveData.upgradeState.push(newUpgradeState);
     }
 
-    return data;
+    return upgradeData;
 }
 
 function PurchaseUpgrade(upgradeData)
 {
     if(saveData.gameState.cookieCounter >= upgradeData.cost)
     {
-        console.log("UpgradeData:", upgradeData);
         saveData.gameState.cps += upgradeData.increase;
         saveData.gameState.cookieCounter -= upgradeData.cost;
         saveData.IncrementUpgradeCount(upgradeData.id);

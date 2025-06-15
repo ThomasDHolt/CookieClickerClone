@@ -9,19 +9,30 @@
 </head>
 <body>
     <header>
-        <h1>Cookie Clicker</h1>
+        <section class="header-container flex-container flex-column flex-centre-horizontal flex-centre-vertical">
+            <h1 class="game-title">Cyber Cookie Clicker</h1>
+            <p class="game-slogan">A cookie clicker game in the near future...</p>
+        </section>
     </header>
     <main>
-        <h2 id="cookieCounter"></h2>
-        <h3 id="cpsText"></h3>
-        <button id="bakeButton">Bake Cookie!</button>
-        <button id="resetButton">Reset</button>
-        <section id="upgradesSection" class="flex-container flex-column">
-
+        <section class="main-content-container flex-container flex-row">
+            <section class="cookie-clicking-container flex-container flex-column flex-centre-vertical section-border-style">
+                <p id="cookieCounter" class="cookie-counter"></p>
+                <p id="cpsText" class="cps-text"></p>
+                <div class="cookie-container flex-container flex-centre-horizontal flex-centre-vertical">
+                    <a><img id="bakeButton" class="cookie-button-size pixelate big-cookie-button" src="./images/BigCookieSprite.webp" /></a>
+                </div>
+            </section>
+            <section class="upgrades-section flex-container flex-column flex-centre-vertical section-border-style">
+                <p class="upgrades-title">Upgrades</p>
+                <div id="upgradesSection" class="upgrades-container flex-container flex-column flex-start scroll-vertical scroll-style"></div>
+            </section>
         </section>
     </main>
     <footer>
-
+        <section class="footer-container flex-container flex-centre-horizontal flex-centre-vertical">
+            <p>Copyright&copy; Thomas Holt 2025</p>
+        </section>
     </footer>
 </body>
 </html>

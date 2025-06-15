@@ -1,3 +1,18 @@
+@font-face {
+    font-family: "Terminal";
+    src: url("../fonts/Terminal.ttf");
+}
+
+* {
+    font-family: Terminal;
+    color: rgb(51, 255, 0);
+}
+
+body {
+    background-color: rgb(5, 5, 5);
+    margin: 0;
+}
+
 .flex-container {
     display: flex;
 }
@@ -6,6 +21,176 @@
     flex-direction: column;
 }
 
+.flex-row {
+    flex-direction: row;
+}
+
+.flex-centre-horizontal {
+    justify-content: center;
+}
+
+.flex-centre-vertical {
+    align-items: center;
+}
+
+.flex-start {
+    justify-content: flex-start;
+}
+
 .upgrade-button {
-    width: 300px;
+    width: 100%;
+    height: 100%;
+}
+
+.image-div {
+    margin: 20px 20px 20px 20px;
+}
+
+.cookie-clicking-container {
+    width: 50vw;
+    height: 100%;
+}
+
+.cookie-container {
+    width: 100%;
+    height: 100%;
+}
+
+.upgrades-section {
+    width: 50vw;
+    height: 100%;
+}
+
+.upgrades-container {
+    width: 100%;
+}
+
+.upgrade-button:hover {
+    cursor: pointer;
+}
+
+@keyframes cookiePulse {
+    0% {
+        transform: scale(1);
+    }
+
+    50% {
+        transform: scale(0.9);
+    }
+
+    100% {
+        transform: scale(1);
+    }
+}
+
+@keyframes cookieClick {
+    100% {
+        transform: scale(0.8);
+    }
+}
+
+.pixelate {
+    image-rendering: pixelated;
+}
+
+.cookie-button-size {
+    width: 30vw;
+    height: 30vw;
+}
+
+.upgrade-button-image-size {
+    width: 100%;
+    height: 100%;
+}
+
+.big-cookie-button {
+    animation: cookiePulse 6s ease-in-out infinite;
+}
+
+.big-cookie-button:hover {
+    cursor: pointer;
+}
+
+.big-cookie-button:active {
+    animation: cookieClick 0.2s linear;
+}
+
+.game-title {
+    font-size: 400%;
+    margin: 5px 0px 5px 0px;
+}
+
+.game-slogan {
+    font-size: 140%;
+    margin: 20px 0px 0px 0px;
+}
+
+.header-container {
+    width: 100vw;
+    height: 15vh;
+}
+
+.main-content-container {
+    width: 100vw;
+    height: 80vh;
+}
+
+.footer-container {
+    width: 100vw;
+    height: 5vh;
+}
+
+.section-border-style {
+    outline: 4px solid rgb(51, 255, 0);
+}
+
+.image-border-style {
+    border: 4px solid rgb(51, 255, 0);
+}
+
+.upgrade-button-border-style {
+    outline: 2px solid rgb(51, 255, 0);
+}
+
+.cookie-counter {
+    font-size: 400%;
+    margin: 4% 0px 2% 0px;
+}
+
+.cps-text {
+    font-size: 200%;
+    margin: 2% 0px 2% 0px;
+}
+
+.upgrades-title {
+    font-size: 400%;
+    margin: 4% 0px 2% 0px;
+}
+
+.scroll-vertical {
+    overflow-y: scroll;
+}
+
+.scroll-style {
+    scrollbar-color: rgb(51, 255, 0) transparent;
+}
+
+.upgrade-cost-font {
+    color: rgb(255, 204, 0);
+}
+
+.upgrade-total-font {
+    color: rgb(216, 216, 216);
+}
+
+.upgrade-name-margin {
+    margin-right: 10px;
+}
+
+.text-at-end {
+    text-align: end;
+}
+
+.flex-grow {
+    flex-grow: 1;
 }

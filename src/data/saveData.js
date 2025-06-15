@@ -20,8 +20,36 @@ export const upgradeCountState = {
 
 export let upgradeState = [] // Tracks how many of each upgrade we have in the current game
 export let upgradeData = [] // A record of data about each upgrade for performing checks and calculations
+export let upgradeImages = [] // A record of upgrade images and their source paths
 
 export function SetUpgradeData(newUpgradeData) {upgradeData = newUpgradeData;}
+export function SetUpgradeImageData(newUpgradeImageData) {upgradeImages = newUpgradeImageData;}
+
+export function GetUpgradeImage(upgradeId)
+{
+    try
+    {
+        for(let i = 0; i < upgradeImages.length; i++)
+        {
+            if(upgradeImages[i].id == upgradeId) {return upgradeImages[i].src;}
+        }
+    } catch(error)
+    {
+        throw new Error(`${error}`);
+    }
+}
+
+export function GetUpgradeCount(name)
+{
+    try
+    {
+        return upgradeCountState[name];
+    } catch(error)
+    {
+        throw new Error(`${error}`);
+    }
+}
+
 export function IncrementUpgradeCount(upgradeId)
 {
     for(let i = 0; i < upgradeState.length; i++)

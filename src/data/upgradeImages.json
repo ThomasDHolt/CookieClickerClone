@@ -1,0 +1,52 @@
+[
+    {
+        "id": 1,
+        "name": "Auto-Clicker",
+        "src": "./images/upgradeImages/AutoClickerSprite.webp"
+    },
+    {
+        "id": 2,
+        "name": "Enhanced Oven",
+        "src": "./images/upgradeImages/EnhancedOvenSprite.webp"
+    },
+    {
+        "id": 3,
+        "name": "Cookie Farm",
+        "src": "./images/upgradeImages/CookieFarmSprite.webp"
+    },
+    {
+        "id": 4,
+        "name": "Robot Baker",
+        "src": "./images/upgradeImages/RobotBakerSprite.webp"
+    },
+    {
+        "id": 5,
+        "name": "Cookie Factory",
+        "src": "./images/upgradeImages/CookieFactorySprite.webp"
+    },
+    {
+        "id": 6,
+        "name": "Magic Flour",
+        "src": "./images/upgradeImages/MagicFlourSprite.webp"
+    },
+    {
+        "id": 7,
+        "name": "Time Machine",
+        "src": "./images/upgradeImages/TimeMachineSprite.webp"
+    },
+    {
+        "id": 8,
+        "name": "Quantum Oven",
+        "src": "./images/upgradeImages/QuantumOvenSprite.webp"
+    },
+    {
+        "id": 9,
+        "name": "Alien Technology",
+        "src": "./images/upgradeImages/AlienTechnologySprite.webp"
+    },
+    {
+        "id": 10,
+        "name": "Interdimensional Baker",
+        "src": "./images/upgradeImages/InterdimensionalBakerSprite.webp"
+    }
+]
